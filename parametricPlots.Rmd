@@ -1,0 +1,1219 @@
+---
+title: "firstPrints"
+author: "Aidan"
+date: "4/24/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(colorspace)
+# choose_palette() # GUI for choosing colors
+
+
+```
+
+
+```{r}
+# Width Height exmaples
+#    (768,432) ... Small
+#    (1280,720) ... Medium 720p
+#    (1920,1080) ... XL 1080p
+#    (3840, 2160).... XXL 4K
+# Resolution
+#  72 is Standard
+#      Darker. Jagged Lines(even at 1080)
+#  200 is Medium
+#      Much brighter than 72. Not squished, barely jagged lines at 1080
+#  300 is Higher pixel density 
+#      More tron-like. Squished, brighter, smoother lines
+#  500 is SUPERSQUISHED
+# Type
+#  Keep at cairo so that anti-aliasing is on.
+# Code for png generation/closing
+#  png("orangeXs1080_200PPI_41720.png", width = 1920, height = 1080, res=200, type = 'cairo')
+#  dev.off()
+```
+
+
+```{r}
+# Orange X's Plot Without Yellow Centers
+limSize <- 0.01
+numIter <- 9
+seqScale <- 8*pi
+yelRedPalette <- sequential_hcl(n=numIter,palette = "OrYel", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(0,0,0,0)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+t <- seq(0,seqScale,by=0.02)
+
+for(i in 3:numIter){
+  x <- cos(i*t)
+  y <- sin((i^2)*t)
+  polygon(x,y, border = yelRedPalette[i])
+}
+
+
+```
+
+```{r}
+# Electric Algae Seatcushion
+
+limSize <- 1
+numIter <- 60
+seqScale <- 4*pi
+
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "DarkMint", rev=FALSE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(0,0,0,0)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=0.02)
+
+for(i in 1:numIter){
+  x <- (cos(i+t))^3
+  y <- (sin(t))^3
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Double Line Bulges
+
+limSize <- .8
+numIter <- 20
+seqScale <- 4*pi
+increment <- 0.02
+
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Plasma", rev=FALSE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(0,0,0,0)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- (cos(i+1*t))^3
+  y <- (sin(t))^3
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+
+# 4 Corners of an Astroid
+
+limSize <- 1
+numIter <- 7
+seqScale <- 4*pi
+increment <- 0.02
+borderEdge <- 1
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Plasma", rev=FALSE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- (cos(i+t))^3
+  y <- (sin(t))^3
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Red Void
+
+limSize <- 1
+numIter <- 8
+seqScale <- 4*pi
+increment <- 0.02
+borderEdge <- 2
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=FALSE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i/8*(cos(t))^3
+  y <- i/8*(sin(t))^3
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+
+# Scarlet Backbone
+
+limSize <- 75
+numIter <- 20
+seqScale <- 4*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(cos(t))^3
+  y <- 3*i-6*(sin(t))^3
+  polygon(x,y, border = Palette[i])
+}
+```
+
+
+```{r}
+
+# Red Brick Road
+
+limSize <- 75
+numIter <- 26
+seqScale <- 4*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- (0.67*i)^2*(cos(t))^3
+  y <- -3*i-6*(sin(t))^3
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+
+# Splash
+
+limSize <- 12
+numIter <- 25
+seqScale <- 6*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(cos(t))^3*sin(t)
+  y <- i*(sin(t))^3*cos(t)
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+
+# Struck Top (Try with really high PPI For thick lines)
+
+limSize <- 4
+numIter <- 4
+seqScale <- 6*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(cos(t))^3*sin(i*t)
+  y <- i*(sin(t))^3
+  polygon(x,y, border = Palette[i],lwd = 3)
+}
+```
+
+```{r}
+
+# Squinting Ovaries
+
+limSize <- 4
+numIter <- 4
+seqScale <- 4*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- i*(cos(t))^3*cos(i*t)
+  x <- i*(sin(t))^3
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+
+# Crossing Lines (V. Abstract)
+
+limSize <- .8
+numIter <- 8
+seqScale <- 4*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="white", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(cos(t))^3*cos(i*t)
+  y <- i*(sin(t))^3*sin(i*t)
+  polygon(x,y, border = Palette[i],lwd=2)
+}
+```
+
+```{r}
+
+# Offset Haywire Red Cross
+limSize <- 2
+numIter <- 8
+seqScale <- 4*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge+12,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- (cos(t))^3*cos(i*t)
+  y <- i*(sin(t))^3*sin(i*t)
+  polygon(x,y, border = Palette[i])
+}
+```
+
+
+```{r}
+
+# Encroaching Jellies
+
+limSize <- 10
+numIter <- 6
+seqScale <- 4*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- i*(cos(t))^3*sin(i*t-i^2)
+  x <- (i*numIter)*(sin(t))^3
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+
+# Lips
+
+limSize <- 20
+numIter <- 22
+seqScale <- 6*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(cos(t))^3
+  y <- i*(sin(t))^3*cos(t)
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+
+# Stacked 3:4 Lissajous
+
+limSize <- 4
+numIter <- 4
+seqScale <- 6*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*cos(3*t)
+  y <- i*sin(4*t)
+  polygon(x,y, border = Palette[i])
+}
+```
+
+# Cardioid Series
+
+```{r}
+# Nested Coffee Tables
+
+limSize <- 4
+numIter <- 4
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*cos(9*t)
+  y <- i*sin(4*t)
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Hokkaido
+## Idea: Copy top half to bottom half and inverse color scheme, i.e. y for second becomes -y
+
+
+limSize <- 16
+numIter <- 9
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Purples", rev=TRUE)
+
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- (2*cos(i*t) − cos(2*t))
+  x <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Sunset At The Truman Show
+
+limSize <- 2.8
+numIter <- 16
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Purples", rev=TRUE)
+Palette2 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- (2*cos(i*t) − cos(2*t))
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+
+
+for(i in 1:numIter){
+  x <- -(2*cos(i*t) − cos(2*t))
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+
+```
+
+```{r}
+
+# Sunset Cups
+## Make a sea of cups: offset them with less iterations
+png("sunsetCups_2160_250.png", width = 3840, height = 2160, res=250, type = 'cairo')
+
+limSize <- 35
+numIter <- 12
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Purples", rev=TRUE)
+Palette2 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- (2*cos(i*t) − cos(2*t))
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+
+
+for(i in 1:numIter){
+  x <- -(2*cos(i*t) − cos(2*t))
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+
+dev.off()
+```
+
+```{r}
+
+# Decomposition of a Chalise
+## Palettes for Most external can be altered, Palette has a nice whiteish for contrast purp
+
+limSize <- 35
+numIter1 <- 15
+numIter2 <- 8
+numIter3 <- 5
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Purples", rev=TRUE)
+Palette2 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+
+LPalette <- sequential_hcl(n=numIter,palette = "Purples", rev=FALSE)
+LPalette2 <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-(limSize) , limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+# Central Branch
+for(i in 1:numIter1){
+  x <- (2*cos(i*t) − cos(2*t)) 
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter1){
+  x <- -(2*cos(i*t) − cos(2*t)) 
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+
+# Right of Center Branch
+for(i in 1:numIter2){
+  x <- (2*cos(i*t) − cos(2*t)) + 10
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter2){
+  x <- -(2*cos(i*t) − cos(2*t)) + 13
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+
+# Left of Center Branch
+for(i in 1:numIter2){
+  x <- (2*cos(i*t) − cos(2*t)) - 10
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter2){
+  x <- -(2*cos(i*t) − cos(2*t)) - 13
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+
+
+# Far Right
+for(i in 1:numIter3){
+  x <- (2*cos(i*t) − cos(2*t)) + 22
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+
+for(i in 1:numIter3){
+  x <- -(2*cos(i*t) − cos(2*t)) + 26
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = LPalette2[i])
+}
+
+# Far Left
+for(i in 1:numIter3){
+  x <- (2*cos(i*t) − cos(2*t)) - 22
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+
+for(i in 1:numIter3){
+  x <- -(2*cos(i*t) − cos(2*t)) - 27
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = LPalette2[i])
+}
+```
+
+```{r}
+# Unraveling Axes
+
+limSize <- 26
+numIter <- 12
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Purples", rev=TRUE)
+Palette2 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- (2*cos(i*t) − cos(2*t))
+  y <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+
+
+for(i in 1:numIter){
+  y <- -(2*cos(i*t) − cos(2*t))
+  x <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+```
+
+```{r}
+# Tick
+
+limSize <- 5
+numIter <- 13
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Terrain", rev=FALSE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=FALSE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- 2*(2*cos(i*t) − cos(i*2*t))+2.7
+  x <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+
+
+for(i in 3:numIter){
+  y <- -(2*cos(i*t) − cos(i*2*t))*cos(t)-2.3
+  x <- i*(2*sin(t) - sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Center C
+
+limSize <- 8
+numIter <- 8
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=FALSE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=FALSE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- 1*(2*cos(t^2) − cos(2*t))
+  x <- -1*(2*sin(t) − i*sin(2*t))
+  polygon(x,y, border = Palette[i])
+}
+
+```
+
+```{r}
+# Neon Compression
+
+limSize <- 12
+numIter <- 11
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- 1*(2*cos(t^1.27) − 1.5*cos(2*t^(1.8))) - 4
+  y <- -1*(2*sin(t) − i*sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+```
+
+```{r}
+# Tropical Hearts
+
+limSize <- 26
+numIter <- 11
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Reds", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(2*cos(t) − cos(2*t)) 
+  y <- -i*(2*sin(t) − cos(t)*sin(2*t))
+  polygon(x,y, border = Palette2[i])
+}
+
+```
+
+
+```{r}
+
+# Sunset Via Knife
+
+limSize <- 15
+numIter <- 12
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- (i - 8 + i* cos(t))
+  x <- i*tan(t) + i*sin(t)
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Tanh Cornucopia
+
+limSize <- 15
+numIter <- 23
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- (i + i* cos(t)) - 15
+  x <- i*tanh(t) + i*sin(t) - 15
+  polygon(x,y, border = Palette[i])
+}
+```
+
+
+```{r}
+# Rainbow Slacks
+
+limSize <- 6
+numIter <- 50
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- -(i + i^2* cos(t))
+  x <- i*tanh(t) - i*sin(t) 
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter){
+  y <- -(i + i^2* cos(t))
+  x <- -(i*tanh(t) - i*sin(t)) 
+  polygon(x,y, border = Palette2[i])
+}
+```
+
+```{r}
+
+# Throne with a Pedastal
+
+limSize <- 40
+numIter <- 40
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- 8*(cos(t) + sin(t))
+  y <- i*tanh(t) - i*sin(t) - 38
+  polygon(x,y, border = Palette[i])
+}
+```
+
+
+```{r}
+# Dipole Conic Weaver
+
+limSize <- 30
+numIter <- 25
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette3 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(cos(t) + sin(t))
+  y <- -( i*tan(t))
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter){
+  x <- i*(cos(t) + sin(t))
+  y <- ( i*tan(t)) + 4
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Drip
+
+limSize <- 30
+numIter <- 16
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette3 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(cos(t) + sin(t))
+  y <- -( i*tan(t))
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter){
+  x <- i*(cos(t) + sin(t)) + i
+  y <- -( i*tan(t))
+  polygon(x,y, border = Palette3[i])
+}
+
+for(i in 1:numIter){
+  x <- i*(cos(t) + sin(t)) - i
+  y <- -( i*tan(t))
+  polygon(x,y, border = Palette3[i])
+}
+```
+
+```{r}
+# Handrawn Sentry
+
+limSize <- 24
+numIter <- 8
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette3 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*(cos(t) + sin(t)*cos(t)*rnorm(1,0.005))
+  y <- ( i*tan(t)*sin(t))
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter){
+  x <- i*(cos(t) + sin(t)*cos(t)*rnorm(1,0.009))
+  y <- - ( i*tan(t)*sin(t))
+  polygon(x,y, border = Palette3[i])
+}
+```
+
+```{r}
+# Enclosing Background Walls
+
+limSize <- 24
+numIter <- 19
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette3 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i + sin(t)
+  y <- sin(t) + i*sin(t)
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter){
+  x <- -(i + sin(t)) - 2
+  y <- (sin(t) + i*sin(t))
+  polygon(x,y, border = Palette[i])
+}
+```
+
+
+```{r}
+# S Galaxy
+
+limSize <- 22
+numIter <- 20
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette3 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- 12*(i*cos(t)*rnorm(1,0.04,0.001) + sin(t))
+  x <- sin(t) + i*sin(t)
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Unstable Trophic Levels
+
+limSize <- 7
+numIter <- 10
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette3 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  y <- cos(i*t)+2
+  x <- sin(t)*cosh(t)
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter){
+  y <- cos(i*t)
+  x <- sinh(t)*cosh(t)-2
+  polygon(x,y, border = Palette[i])
+}
+
+for(i in 1:numIter){
+  y <- cos(i*t)-2
+  x <- sin(t)*cosh(t)*rnorm(1)
+  polygon(x,y, border = Palette[i])
+}
+```
+
+```{r}
+# Falling Stacks
+
+limSize <- 20
+numIter <- 20
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "Sunset", rev=FALSE)
+Palette3 <- sequential_hcl(n=numIter,palette = "Sunset", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+
+for(i in 1:numIter){
+  x <- i*cosh(t) - 20
+  y <- sinh(t) - 10
+  polygon(x,y, border = Palette3[i])
+}
+```
+
+```{r}
+# Betas?
+
+limSize <- 80
+numIter <- 12
+seqScale <- 2*pi
+increment <- 0.02
+borderEdge <- 0
+# hcl_palettes(plot=TRUE) will show graph of palettes
+# Normally, darkest color is first. If rev=TRUE, then lightest color first.
+Palette <- sequential_hcl(n=numIter,palette = "YlGnBu", rev=FALSE)
+Palette3 <- sequential_hcl(n=numIter,palette = "YlGnBu", rev=TRUE)
+Palette2 <- diverge_hcl(n=numIter,palette = "Tropic", rev=TRUE)
+# mar changes margins: https://bookdown.org/ndphillips/YaRrr/plot-margins.html
+par(bg="black", mar = c(borderEdge,borderEdge,borderEdge,borderEdge)) 
+plot.new()
+plot.window(xlim=c(-limSize,limSize),ylim=c(-limSize,limSize))
+
+
+t <- seq(0,seqScale,by=increment)
+a <- 6
+b <- 3
+for(i in 1:numIter){
+ x <-  i*((a + b)*(cosh(t)) − b*cos((a/b + 1)*t)) - 88
+ y <-  i*((a + b)*(sin(t)) − b*sin((a/b + 1)*t)) -40
+  polygon(x,y, border = Palette3[i])
+}
+```
+
